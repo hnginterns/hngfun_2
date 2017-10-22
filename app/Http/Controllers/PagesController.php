@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Unirest;
 
+
 class PagesController extends Controller
 {
+   
     //
     public function index(){
         return view('pages.index');
@@ -17,10 +19,11 @@ class PagesController extends Controller
     }
 
     public function participants(){
+        $token = env('SLACK_TOKEN');
         Unirest\Request::verifyPeer(false);
         $cursor ='';
         $headers = array('Accept' => 'application/json');
-        $data = array('token' => 'xoxp-126706790599-233947500993-259074763425-4f7dd8e7d44a03b6c035717f9254853d',
+        $data = array('token' => $token,
         'cursor'=>$cursor,'limit'=>'');
         
         $body = Unirest\Request\Body::form($data);
