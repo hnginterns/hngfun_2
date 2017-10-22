@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Unirest;
-
 
 class PagesController extends Controller
 {
@@ -17,22 +15,7 @@ class PagesController extends Controller
     public function project(){
         return view('pages.project');
     }
-
-    public function participants(){
-        $token = env('SLACK_TOKEN');
-        Unirest\Request::verifyPeer(false);
-        $cursor ='';
-        $headers = array('Accept' => 'application/json');
-        $data = array('token' => $token,
-        'cursor'=>$cursor,'limit'=>'');
-        
-        $body = Unirest\Request\Body::form($data);
-        
-        $response = Unirest\Request::post('https://slack.com/api/users.list', $headers, $body);
-        $members  = $response->body->members;
-        return view('pages.participants', compact('members'));
-        
-    }
+    
     public function pastinternship(){
         return view('pages.pastinternship');
     }
