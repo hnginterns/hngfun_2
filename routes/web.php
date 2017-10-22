@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+Route::get('/',['uses'=>'PagesController@index']);
+Route::get('/project',['uses'=>'PagesController@project']);
+Route::get('/participants',['uses'=>'PagesController@participants']);
+Route::get('/pastinternship',['uses'=>'PagesController@pastinternship']);
+Route::get('/blog',['uses'=>'PagesController@blog']);
+Route::get('/task',['uses'=>'PagesController@task']);
+Route::get('/library',['uses'=>'PagesController@library']);
+Route::get('/supporters',['uses'=>'PagesController@supporters']);
+Route::get('/about',['uses'=>'PagesController@about']);
+Route::get('/contact',['uses'=>'PagesController@contact']);
