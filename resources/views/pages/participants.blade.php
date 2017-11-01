@@ -7,7 +7,7 @@
 @section('body')
 <section class="container-fuild content text-center">
   <div class="jumbotron bg-image">
-   <img class="" src="img/logo.png" alt="Cross section of participants" id="logo">
+   <img class="" src="{{ URL::asset('img/logo.png') }}" alt="Cross section of participants" id="logo">
    <div class="row text-right">
          <div class="col-lg-6">
          <div class="input-group" id="search">
@@ -66,52 +66,59 @@
                     </div>
         		</div>
         </div>
+        <a href="{{url('participants/active')}}">active<a>
         <!--first profile row-->
     <div class="container">
         <div class ="row  justify-content-center text-center profileRow">
-            @foreach($members as $member)
-                @if($member->deleted !=TRUE  and $member->name !='slackbot' and $member->is_admin ==FALSE )
-                    <div class="col-md-3">
-                        <div class="card project-card participant">
-                        <div class="participant-img">
-                            <img class="card-img-top" src="{{$member->profile->image_192}}" alt="Card image cap">
-                        </div>
-                        <div class="card-block project-card-block">
-                            <p class="card-text">{{$member->profile->real_name_normalized}}</p>
-                            @if(isset($member->profile->title))
-                                @if(strlen($member->profile->title)>15)
-                                <p class="card-text2">{{substr($member->profile->title,0,20)}}</p>
+        
+              @if(isset($memberstoshow))
+                @foreach($memberstoshow as $member)
+                        <div class="col-md-3">
+                            <div class="card project-card participant">
+                            <div class="participant-img">
+                                <img class="card-img-top" src="{{$member->profile->image_192}}" alt="Card image cap">
+                            </div>
+                            <div class="card-block project-card-block">
+                                <p class="card-text">{{$member->profile->real_name_normalized}}</p>
+                                @if(isset($member->profile->title))
+                                    @if(strlen($member->profile->title)>15)
+                                    <p class="card-text2">{{substr($member->profile->title,0,20)}}</p>
+                                    @else
+                                <p class="card-text2">{{$member->profile->title}}</p>
+                                @endif
                                 @else
-                            <p class="card-text2">{{$member->profile->title}}</p>
-                            @endif
-                            @else
-                            <p class="card-text2">...</p>
-                            @endif
-                            <div class="row details">
-                                <div class="col-xs-6">
-                                    <p class="slackId text-left">{{$member->name}}</p>
-                                </div>
-                                <div class="col-sm-6 text-right">
-                                    <a href="#"> <i class="fa fa-user fonta"></i></a>
-                                    <a href="#"> <i class="fa fa-envelope fonta"></i></a>
+                                <p class="card-text2">...</p>
+                                @endif
+                                <div class="row details">
+                                    <div class="col-xs-6">
+                                        <p class="slackId text-left">{{$member->name}}</p>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <a href="#"> <i class="fa fa-user fonta"></i></a>
+                                        <a href="#"> <i class="fa fa-envelope fonta"></i></a>
+                                    </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
-                         </div>
-                    </div>
-                @endif
-    @endforeach
+                @endforeach
+              @endif
            
             </div>
         </div>
         <nav aria-label="Page navigation example" class="pageChange">
            <ul class="pagination justify-content-end">
-              <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true" id="nxt">&laquo;</span><span class="sr-only">Previous</span></a></li>
-              <li class="page-item  active"><a class="page-link" href="#" id="no">1</a></li>
-              <li class="page-item"><a class="page-link" href="#" id="no">2</a></li>
-              <li class="page-item"><a class="page-link" href="#" id="no">3</a></li>
-              <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true" id="nxt">&raquo;</span><span class="sr-only">Next</span></a></li>
-          </ul>
+                @if($pages > 1)
+              <li class="page-item disabled"><a class="page-link" href="{{route('/participants/1')}}">1</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#" >...</a></li>
+                @endif
+                @for($i=$pages;$i <5;$i++)
+                    @if($start ==$pages)
+                    <li class="page-item  active"><a class="page-link" href="{{url('/participants/'.$i)}}" id="no">{{$i}}</a></li>
+                     @endif
+                <li class="page-item"><a class="page-link" href="{{url('/participants/'.$i)}}" id="no">{{$i}}</a></li>
+              @endfor
+              </ul>
         </nav>
       </div>
     </section>

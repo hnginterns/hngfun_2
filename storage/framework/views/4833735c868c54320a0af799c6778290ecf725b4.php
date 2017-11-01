@@ -7,26 +7,26 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" href="favicon.ico">
-  <title>Hng fun | @yield('title') </title>
-  <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
+  <title>Hng fun | <?php echo $__env->yieldContent('title'); ?> </title>
+  <link href="<?php echo e(URL::asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
   <script type="text/javascript" src="js/jquery.js"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet">
+  <link href="<?php echo e(URL::asset('css/custom.css')); ?>" rel="stylesheet">
 <!--  ANIMATION SCRIPTS AND CSS !-->
 
-  <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/animate.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/waypoints.css') }}">
-  <script src="{{ URL::asset('js/jquery.waypoints.min.js') }}" type="text/javascript"></script>
-  <script src="{{ URL::asset('js/jwaypoints.js') }}" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="<?php echo e(URL::asset('css/animate.css')); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo e(URL::asset('css/waypoints.css')); ?>">
+  <script src="<?php echo e(URL::asset('js/jquery.waypoints.min.js')); ?>" type="text/javascript"></script>
+  <script src="<?php echo e(URL::asset('js/jwaypoints.js')); ?>" type="text/javascript"></script>
 </head>
 
 <body>
-    @include('layouts.header')
+    <?php echo $__env->make('layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
   
-    @yield('body')
+    <?php echo $__env->yieldContent('body'); ?>
     
-    @include('layouts.footer')
+    <?php echo $__env->make('layouts.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 
 

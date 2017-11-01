@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     Participant
 <?php $__env->stopSection(); ?>
@@ -5,7 +7,7 @@
 <?php $__env->startSection('body'); ?>
 <section class="container-fuild content text-center">
   <div class="jumbotron bg-image">
-   <img class="" src="img/logo.png" alt="Cross section of participants" id="logo">
+   <img class="" src="<?php echo e(URL::asset('img/logo.png')); ?>" alt="Cross section of participants" id="logo">
    <div class="row text-right">
          <div class="col-lg-6">
          <div class="input-group" id="search">
@@ -68,42 +70,9 @@
         <!--first profile row-->
     <div class="container">
         <div class ="row  justify-content-center text-center profileRow">
-            <?php if(isset($members)): ?>
-            <?php $__currentLoopData = $members; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $member): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if($member->deleted !=TRUE   and $member->name !='slackbot' and $member->is_admin ==FALSE and $member->profile->real_name_normalized !=='Google Drive' ): ?>
-                    <div class="col-md-3">
-                        <div class="card project-card participant">
-                        <div class="participant-img">
-                            <img class="card-img-top" src="<?php echo e($member->profile->image_192); ?>" alt="Card image cap">
-                        </div>
-                        <div class="card-block project-card-block">
-                            <p class="card-text"><?php echo e($member->profile->real_name_normalized); ?></p>
-                            <?php if(isset($member->profile->title)): ?>
-                                <?php if(strlen($member->profile->title)>15): ?>
-                                <p class="card-text2"><?php echo e(substr($member->profile->title,0,20)); ?></p>
-                                <?php else: ?>
-                                <p class="card-text2"><?php echo e($member->profile->title); ?></p>
-                                <?php endif; ?>
-                            <?php else: ?>
-                            <p class="card-text2">..</p>
-                            <?php endif; ?>
-                            <div class="row details">
-                                <div class="col-xs-6">
-                                    <p class="slackId text-left"><?php echo e($member->name); ?></p>
-                                </div>
-                                <div class="col-sm-6 text-right">
-                                    <a href="#"> <i class="fa fa-user fonta"></i></a>
-                                    <a href="#"> <i class="fa fa-envelope fonta"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                         </div>
-                    </div>
-                <?php endif; ?>
-                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-              <?php endif; ?>
-             <!--  <?php if(isset($members)): ?>
-                <?php $__currentLoopData = $members; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $member): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        
+              <?php if(isset($memberstoshow)): ?>
+                <?php $__currentLoopData = $memberstoshow; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $member): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-3">
                             <div class="card project-card participant">
                             <div class="participant-img">
@@ -133,18 +102,23 @@
                             </div>
                         </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-              <?php endif; ?> -->
+              <?php endif; ?>
            
             </div>
         </div>
         <nav aria-label="Page navigation example" class="pageChange">
            <ul class="pagination justify-content-end">
-              <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true" id="nxt">&laquo;</span><span class="sr-only">Previous</span></a></li>
-              <li class="page-item  active"><a class="page-link" href="#" id="no">1</a></li>
-              <li class="page-item"><a class="page-link" href="#" id="no">2</a></li>
-              <li class="page-item"><a class="page-link" href="#" id="no">3</a></li>
-              <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true" id="nxt">&raquo;</span><span class="sr-only">Next</span></a></li>
-          </ul>
+                <?php if($pages > 1): ?>
+              <li class="page-item disabled"><a class="page-link" href="<?php echo e(route('/participants/1')); ?>">1</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#" >...</a></li>
+                <?php endif; ?>
+                <?php for($i=$pages;$i <5;$i++): ?>
+                    <?php if($start ==$pages): ?>
+                    <li class="page-item  active"><a class="page-link" href="<?php echo e(url('/participants/'.$i)); ?>" id="no"><?php echo e($i); ?></a></li>
+                     <?php endif; ?>
+                <li class="page-item"><a class="page-link" href="<?php echo e(url('/participants/'.$i)); ?>" id="no"><?php echo e($i); ?></a></li>
+              <?php endfor; ?>
+              </ul>
         </nav>
       </div>
     </section>

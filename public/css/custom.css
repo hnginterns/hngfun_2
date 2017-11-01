@@ -524,42 +524,139 @@ h2 {
 
 /*          LIBRARY PAGE   STYLING          */
 
-.img-circle {
-    border-radius: 70%;
+
+.col-special
+{
+   
+    min-height: 300px;
+    padding: 15px;
+    -webkit-border-radius: 0, 0, 5px, 5px;
+    border-radius: 0, 0, 5px, 5px;
+    
+}
+.col-special a
+{
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 1.4em;
 }
 
-.library-search {
-  padding-top: 50px;
-  padding-bottom: 50px;
+.btn-img
+{
+    margin-left: 10px;
 }
 
-.library-carousel {
-  width: 70%;
-  margin: 0 auto
+.mydiv
+{
+    margin: 5px auto;
+    text-align: center;
+
+}
+.carousel-inner
+{
+    min-height: 100px;
+    
+}
+.mywrapper
+{
+    background-color: darkgrey;
 }
 
-.library-carousel p {
-  font-size: 28px;
-  line-height: 43px;
+
+
+.mydiv input
+{
+    margin-left: 50px;
+    border: 0px solid grey;
+    min-height: 50px;
+    width: 150px;
 }
 
-.library-tips {
-  background: #E1E1E1;
-  padding: 30px 50px 80px 50px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+.mybackground
+{
+    background-image: url("http://res.cloudinary.com/fting/image/upload/v1508419942/backgroundmostrecent_tfo5xp.png");
+    padding-top: 40px;
+    padding-bottom: 80px;
+    
 }
 
-.library-tips h2 {
-  margin-top: 30px;
-  margin-bottom: 60px;
-  text-transform: capitalize;
+.primary
+{
+    text-align: center;
+    background-color: #3D9EE3;
+    color: rgb(255, 255, 255);
+}
+.primary a
+{
+    color: #fff;
+}
+.col-top
+{
+   text-align: center; 
+   min-height: 250px; 
 }
 
-.library__hng-text {
-  color: #3D9EE3;
+.col-top span
+{
+   text-align: center; 
+   font-size: 1.4em;
+   padding: 5%; 
+}
+.col-bottom
+{
+    text-align: center;
+    min-height: 70px;
+    line-height: 70px;
+    margin-top: -12px;
+    border-radius: 0 0 10px 10px;
 }
 
+.plain
+{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    color: #202020;   
+}
+.plain a
+{
+    color: #202020;
+}
+.overlay {
+  background-color: rgba(12, 10, 28, 0.75);
+
+}
+symb {
+  border-bottom: white 4px;
+  color: white;
+  position: relative;
+}
+
+.overlay {
+  max-height: 100%;
+  height: max-content;
+  padding-top: 102px;
+}
+.text-white {
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 5%;
+}
+.symb {
+  border-bottom: 3px solid white;
+  border-radius: 1px;
+}
+
+.srch {
+    margin-right: auto;
+    margin-left: auto;
+    background: #FFFFFF ;
+    border-radius: 10px;
+    margin-top: 0%;
+}
+.srch_icon {
+    background-color: #fff;
+}
 
 
 /*            SUPPORTERS   SRYLING   */
