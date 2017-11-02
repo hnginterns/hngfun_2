@@ -71,8 +71,40 @@
     <div class="container">
         <div class ="row  justify-content-center text-center profileRow">
         
-              @if(isset($memberstoshow))
-                @foreach($memberstoshow as $member)
+              @if(isset($members))
+                @foreach($members as $member)
+                        <div class="col-md-3">
+                            <div class="card project-card participant">
+                            <div class="participant-img">
+                                <img class="card-img-top" src="{{$member->profile->image_192}}" alt="Card image cap">
+                            </div>
+                            <div class="card-block project-card-block">
+                                <p class="card-text">{{$member->profile->real_name_normalized}}</p>
+                                @if(isset($member->profile->title))
+                                    @if(strlen($member->profile->title)>15)
+                                    <p class="card-text2">{{substr($member->profile->title,0,20)}}</p>
+                                    @else
+                                <p class="card-text2">{{$member->profile->title}}</p>
+                                @endif
+                                @else
+                                <p class="card-text2">...</p>
+                                @endif
+                                <div class="row details">
+                                    <div class="col-xs-6">
+                                        <p class="slackId text-left">{{$member->name}}</p>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <a href="#"> <i class="fa fa-user fonta"></i></a>
+                                        <a href="#"> <i class="fa fa-envelope fonta"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                @endforeach
+              @endif
+              @if(isset($members_active))
+                @foreach($members_active as $member)
                         <div class="col-md-3">
                             <div class="card project-card participant">
                             <div class="participant-img">
@@ -106,20 +138,16 @@
            
             </div>
         </div>
+        <hr>
         <nav aria-label="Page navigation example" class="pageChange">
-           <ul class="pagination justify-content-end">
-                @if($pages > 1)
-              <li class="page-item disabled"><a class="page-link" href="{{route('/participants/1')}}">1</a></li>
-              <li class="page-item disabled"><a class="page-link" href="#" >...</a></li>
-                @endif
-                @for($i=$pages;$i <5;$i++)
-                    @if($start ==$pages)
-                    <li class="page-item  active"><a class="page-link" href="{{url('/participants/'.$i)}}" id="no">{{$i}}</a></li>
-                     @endif
-                <li class="page-item"><a class="page-link" href="{{url('/participants/'.$i)}}" id="no">{{$i}}</a></li>
-              @endfor
-              </ul>
+        @if(isset($members))
+        {{ $members->appends(Request::except('page'))->render() }}
+        @endif
+        @if(isset($members_active))
+        {{ $members_active->appends(Request::except('page'))->render() }}
+        @endif
         </nav>
+        <hr>
       </div>
     </section>
 

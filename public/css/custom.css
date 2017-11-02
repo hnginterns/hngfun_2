@@ -223,10 +223,6 @@ h2 {
         .details{
             padding-left: 1em;
         }
-        .pageChange{
-            margin-top: 35px;
-            margin-right: 1em;
-        }
         .navbar{
             background-color: #ffffff;
         }
@@ -271,8 +267,29 @@ h2 {
         font-weight: bolder;
         font-size: 20px;
       }
-
-
+      .pagination {
+        margin: 0 auto;
+        width: 50%;
+      }
+      .pagination li {
+        width: 3em;
+        border:1px solid #2092e3;
+        background: #ffffff;
+      }
+      .pagination li a{
+        display: block;
+      }
+      .pagination li:hover {
+        background: #2092e3;
+      }
+      .pagination li:hover a{
+        color:#ffffff;
+        text-decoration: none;
+      }
+      .pagination li.active {
+        background:#2092e3;
+        color:#ffffff;
+      }
 
 
 
@@ -998,6 +1015,11 @@ symb {
   }
   .contact-form input[type='submit'] {
     margin-bottom: 2%; 
+  }
+  /* pArticipant */
+  .pagination {
+    margin: 0 auto;
+    width: 100%;
   }
   /*      About Page      */
   .about-us {

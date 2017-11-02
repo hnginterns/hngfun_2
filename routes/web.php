@@ -18,6 +18,7 @@ Route::get('/',['uses'=>'PagesController@index']);
 Route::get('/project',['uses'=>'PagesController@project']);
 Route::get('/participants',['uses'=>'ParticipantsContoller@index']);
 Route::get('/participants/{page}',['uses'=>'ParticipantsContoller@index']);
+Route::get('/participants/active/{page}',['uses'=>'ParticipantsContoller@active']);
 Route::get('/pastinternship',['uses'=>'PagesController@pastinternship']);
 Route::get('/blog',['uses'=>'PagesController@blog']);
 Route::get('/task',['uses'=>'PagesController@task']);
