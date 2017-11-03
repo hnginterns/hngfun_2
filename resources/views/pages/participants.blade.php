@@ -11,10 +11,12 @@
    <div class="row text-right">
          <div class="col-lg-6">
          <div class="input-group" id="search">
-            <input type="text" class="form-control" placeholder="Search by participants name or slack username" aria-label="Search for..." id="textHolder">
+             <form class="form form-inline" action="{{url('/participants/search')}}" method="get">
+            <input type="text" class="form-control" name="user" placeholder="Search by participants slack username" aria-label="Search for..." id="textHolder">
               <span class="input-group-btn">
-                <button class="btn " type="button" id="searchbutton">Search</button>
+                <button class="btn " type="submit" id="searchbutton">Search</button>
               </span>
+</form>
           </div>
         </div>
   </div>
@@ -34,39 +36,37 @@
   </div>
 		</div>
 		<div class="col-sm-12 text-left">
-		    <p class="about">About 2,500 participants in total</p>
+		    <p class="about">
+        {{$total}}
+        @if(isset($members_active))
+        active
+        @endif
+        @if(isset($members_deleted))
+        disabled
+        @endif
+         participants in total</p>
 	    </div>
-        <div class="row">
-        	<div class="col-sm-1 text-center">
-        			<p>sort by</p>
-        	</div>
-        		<div class="col-sm-1.5">
-        	   		<div class="dropdown">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Latest input</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">...</a></div>
-                    </div>
-        		</div>
-        		<div class="col-sm-1.5">
-        	   		<div class="dropdown">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descending</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">...</a>
-                        </div>
-                    </div>
-        		</div>
-        	<div class="col-sm-1.5 text-center display">
-        		<p>display</p>
-        	</div>
-        	    <div class="col-sm-2">
-        	   		<div class="dropdown">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">grid</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">...</a>
-                        </div>
-                    </div>
-        		</div>
-        </div>
-        <a href="{{url('participants/active')}}">active<a>
+    <div class="container-fuild">
+        <nav class="navbar navbar-expand-md navbar-light">
+            <ul class="navbar-nav mr-auto part-nav">
+            @if(isset($members))
+                <li  class="nav-item active"><a  class="nav-link" href="{{url('/participants')}}">All Participants</a></li>
+            @else
+            <li  class="nav-item "><a  class="nav-link" href="{{url('/participants')}}">All Participants</a></li>
+           @endif
+           @if(isset($members_active))
+                <li  class="nav-item active"><a class="nav-link" href="{{url('/participants/actives')}}">Active Participants</a></li>
+            @else
+            <li  class="nav-item"><a class="nav-link" href="{{url('/participants/active')}}">Active Participants</a></li>
+            @endif
+            @if(isset($members_deleted))
+                <li class="nav-item active"><a class="nav-link" href="{{url('/participants/deleted')}}">Deleted Participants</a></li>
+            @else
+            <li class="nav-item"><a class="nav-link" href="{{url('/participants/disabled')}}">Disabled Participants</a></li>
+           @endif
+            </ul>
+        </nav>
+    </div>
         <!--first profile row-->
     <div class="container">
         <div class ="row  justify-content-center text-center profileRow">
@@ -135,6 +135,68 @@
                         </div>
                 @endforeach
               @endif
+              @if(isset($members_deleted))
+                @foreach($members_deleted as $member)
+                        <div class="col-md-3">
+                            <div class="card project-card participant">
+                            <div class="participant-img">
+                                <img class="card-img-top" src="{{$member->profile->image_192}}" alt="Card image cap">
+                            </div>
+                            <div class="card-block project-card-block">
+                                <p class="card-text">{{$member->profile->real_name_normalized}}</p>
+                                @if(isset($member->profile->title))
+                                    @if(strlen($member->profile->title)>15)
+                                    <p class="card-text2">{{substr($member->profile->title,0,20)}}</p>
+                                    @else
+                                <p class="card-text2">{{$member->profile->title}}</p>
+                                @endif
+                                @else
+                                <p class="card-text2">...</p>
+                                @endif
+                                <div class="row details">
+                                    <div class="col-xs-6">
+                                        <p class="slackId text-left">{{$member->name}}</p>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <a href="#"> <i class="fa fa-user fonta"></i></a>
+                                        <a href="#"> <i class="fa fa-envelope fonta"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                @endforeach
+              @endif
+              @if(isset($user))
+              <div class=" member">
+                            <div class="member-img">
+                                <img class="card-img-top" src="{{$user->profile->image_192}}" alt="Card image cap">
+                            </div>
+                            <div class="member-block">
+                                <p class="card-text">{{$user->profile->real_name_normalized}}</p>
+                                @if(isset($user->profile->title))
+                                   
+                                <p class="card-text2">{{$user->profile->title}}</p>
+    
+                                @else
+                                <p class="card-text2">...</p>
+                                @endif
+                                <div class="row details">
+                                    <div class="col-xs-6">
+                                        <p class="slackId text-left">Slack id: @ {{$user->name}}</p>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <a href="#"> <i class="fa fa-user fonta"></i></a>
+                                        <a href="#"> <i class="fa fa-envelope fonta"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    @else
+                       <h2 class="error"> {{$error}}</h2>
+                    @endif
+        
            
             </div>
         </div>
@@ -145,6 +207,9 @@
         @endif
         @if(isset($members_active))
         {{ $members_active->appends(Request::except('page'))->render() }}
+        @endif
+        @if(isset($members_deleted))
+        {{ $members_deleted->appends(Request::except('page'))->render() }}
         @endif
         </nav>
         <hr>
