@@ -17,13 +17,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> 
 	
 	
-	<style class="text/css">
+	<style>
 		body{
 			background-color: #2092E3;
+			margin:0;
+			padding:0;
 		}
 
 #invite-logo{
 	width: 20%;
+}
+.rect1 {
+	height:auto;
+}
+.alert {
+	width:30%;
 }
 @media only screen and (max-width: 738px) {
 	#logo{
@@ -36,20 +44,14 @@
 }
 #invite-footer{
 	background-color: #FFFFFF;
-    padding: 2% 6%;
-	left: 0;
-	bottom: 0;
-	position: absolute;
-	width:100%;
+	padding: 2% 6%;
+	margin:0;
 }
 #invite-footer img{
 	height: 30px;
 	margin-right: 10px;
 }
-#text{
-    color: #ffffff;
-}
-#paragraph1{
+#text,#paragraph1{
     color: #ffffff;
 }
 #link{
@@ -81,10 +83,10 @@
 <body>
     <div class="container-fluid">
         <div class="rect1">
-        <img class="" id="invite-logo" src="img/hngfun_logo.png">
-		<br />
-        <h1 id="text">Join our #Slack community</h1><br />
-        <p id="paragraph1">Meet with other hngfun users, be updated on the newest releases and<br />
+			<img class="" id="invite-logo" src="img/hngfun_logo.png">
+			<br />
+			<h1 id="text">Join our #Slack community</h1><br />
+			<p id="paragraph1">Meet with other hngfun users, be updated on the newest releases and<br />
             be able to reach out to our core team 24/7.</p><br />
             <form id="frm" class="form-inline" method="post" action="{{url('/sendinvite')}}">
 				{{csrf_field()}}
@@ -92,20 +94,24 @@
                         <input name ="email" type="text" class="form-control" id="staticEmail2" placeholder="Email Address">
                     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" id="btn" class="btn btn-primary">Join now</button>
-                </form><br />
-                
-                <p id="paragraph1">Already part of the group? <a id="link" href="https://hnginterns.slack.com" >Signin here.</a></p>
+				</form><br />
+				@if (Session::has('message-error'))
+					<div class="alert alert-danger">{{Session::get('message-error')}}</div>
+				@endif
+				@if (Session::has('message'))
+					<div class="alert alert-success">{{Session::get('message')}}</div>
+				@endif
+                <p id="paragraph1">Already part of the group? <a id="link" href="https://hnginterns.slack.com" >Sign in here.</a></p>
         </div>
         <footer>
-		<div class="">
 			<div id="invite-footer">
 				<p><a href = "https://twitter.com/" target = "_blank"><img src="img/twitter.png" class = "icon"></a>
 					<a href = "https://facebook.com/" target = "_blank"><img src="img/facebook.png" class = "icon"></a>
 					<a href = "https://github.com/" target = "_blank"><img src="img/github2.png" class = "icon"></a>
 				</p></br>
-                <p>&copy; hngfun &nbsp;&nbsp; &#124; &nbsp;&nbsp; Layout credits: HTML5 UP</p>
+                <p>&copy; hngfun &nbsp;&nbsp; &#124; &nbsp;&nbsp; Layout credits: HNG TECH</p>
 			</div>
-		</div>	
+		
         </footer>
 
     </div>
