@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/animate.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/waypoints.css') }}">
   <script src="{{ URL::asset('js/jquery.waypoints.min.js') }}" type="text/javascript"></script>
-  <script src="{{ URL::asset('js/jwaypoints.js') }}" type="text/javascript"></script>
+  <script src="{{ URL::asset('js/waypoints.js') }}" type="text/javascript"></script>
 </head>
 
 <body>
