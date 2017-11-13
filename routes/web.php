@@ -27,3 +27,6 @@ Route::get('/library',['uses'=>'PagesController@library']);
 Route::get('/supporters',['uses'=>'PagesController@supporters']);
 Route::get('/about',['uses'=>'PagesController@about']);
 Route::get('/contact',['uses'=>'PagesController@contact']);
+Route::get('/invite',['uses'=>'InviteController@index']);
+Route::post('/sendinvite',['uses'=>'InviteController@sendinvite']);
+
